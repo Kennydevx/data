@@ -9,15 +9,7 @@
 	<event type="login" name="SkillStagesLogin" event="script" value="skillstageslogin.lua"/>
 	<!-- <event type="attack" name="PVPCreature" script="pvp.lua"/> -->
 	
-	<event type="think" name="treasure_hunt_think" event="script" value="data/creaturescripts/scripts/treasure_hunt.lua"/>
-    <talkaction words="/starttreasurehunt" event="script" value="data/creaturescripts/scripts/treasure_hunt.lua"/>
-    <event type="use" name="treasure_hunt_use" event="script" value="data/creaturescripts/scripts/treasure_hunt.lua"/>
-    
-    <event type="kill" name="pvp_challenge_kill" event="script" value="data/creaturescripts/scripts/pvp_challenge.lua"/>
-    <talkaction words="/startpvp" event="script" value="data/creaturescripts/scripts/pvp_challenge.lua"/>
-    
-    <talkaction words="/startquiz" event="script" value="data/creaturescripts/scripts/quiz_event.lua"/>
-    <talkaction words="/answer" event="script" value="data/creaturescripts/scripts/quiz_event.lua"/>
+	<event type="kill" name="treasure_hunt" script="treasure_hunt.lua"/>
 	
 	<!-- Server Events -->
 	<event type="channeljoin" name="GuildEvents" event="script" value="guild.lua"/>

@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <globalevents>
 	<!-- Server Events -->
+	<globalevent name="pvp_enforced" interval="10000" event="script" file="pvp_enforced.lua"/>
+	<globalevent name="daily_reward" interval="86400000" event="script" file="daily_reward.lua"/>
 	<globalevent name="init" type="startup" event="script" value="init.lua"/>
 	<globalevent name="globalsave" type="globalsave" event="script" value="init.lua"/>
 	<globalevent name="record" type="record" event="script" value="record.lua"/>
