@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mod name="My New Mod" version="1.0" author="Seu Nome" contact="seuemail@exemplo.com" enabled="yes">
+    <event type="login" name="my-login-event" event="script"><![CDATA[
+        function onLogin(cid)
+            doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "Welcome to My New Mod!")
+            return true
+        end
+    ]]></event>
+    <globalevent name="check-status" interval="60000" event="script"><![CDATA[
+        function onThink(interval)
+            print("My New Mod is active.")
+            return true
+        end
+    ]]></globalevent>
+    <talkaction words="/mycommand" event="script"><![CDATA[
+        function onSay(cid, words, param, channelId)
+            doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "You used /mycommand!")
+            return true
+        end
+    ]]></talkaction>
+</mod>
