@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mod name="PvP Challenge" version="1.0" author="YourName" contact="your.email@example.com" enabled="yes">
+    <event type="kill" name="pvp_challenge_kill" event="script">data/creaturescripts/scripts/pvp_challenge.lua</event>
+    <talkaction words="/startpvp" event="script">data/creaturescripts/scripts/pvp_challenge.lua</talkaction>
+</mod>
