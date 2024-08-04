@@ -1,7 +1,7 @@
-local pvpEnforced = false -- Variável global para armazenar o estado do PvP
+-- rookgaard_pvp.lua
+local pvpEnforced = false
 
 function onSay(cid, words, param, channelId)
-    -- Verifica o comando e o parâmetro
     local command = string.lower(param)
     
     if command == "on" then
@@ -23,13 +23,11 @@ end
 
 function onThink(interval)
     if pvpEnforced then
-        -- Forçar PvP em Rookgaard
-        local rookgaard = getTown(12) -- Ajuste o número do ID do município conforme necessário
+        local rookgaard = getTown(12)  -- Assumindo que 12 é o ID de Rookgaard
         
         for _, pid in ipairs(getPlayersInTown(rookgaard)) do
             local player = Player(pid)
             if player then
-                -- Cheque se o PvP está ativado para o jogador
                 if not player:getPvpEnforced() then
                     player:setPvpEnforced(true)
                 end
