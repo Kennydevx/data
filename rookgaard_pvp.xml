@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mod name="Rookgaard PvP Enforced" version="1.0" author="Seu Nome" contact="seuemail@exemplo.com" enabled="yes">
+    <talkaction words="/rookenf" event="script"><![CDATA[
+        function onSay(cid, words, param, channelId)
+            -- Chama o script Lua externo para processar o comando
+            doFile("mods/rookgaard_pvp.lua")
+            return true
+        end
+    ]]></talkaction>
+</mod>
