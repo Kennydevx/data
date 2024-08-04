@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mod name="PvP Challenge" version="1.0" author="YourName" contact="your.email@example.com" enabled="yes">
+    <!-- Evento que inicia o desafio de PvP -->
+    <event type="think" name="pvp_challenge_start" event="script"><![CDATA[
+        function onThink(interval)
+            -- Verifica se o desafio de PvP está ativo
+            local isActive = getGlobalStorageValue(5678) == 1
+            if not isActive then
+                return true
+            end
+
+            -- Envia mensagem para os jogadores
+            local players = getPlayersOnline()
+            for _, pid in ipairs(players) do
+                local player = Player(pid)
+                if player then
+                    doPlayerSendTextMessage(pid, MESSAGE_STATUS_CONSOLE_BLUE, "The PvP challenge has started! Fight in the designated area for rewards!")
+                end
+            end
+
+            return true
+        end
+    ]]></event>
+
+    <!-- Evento para iniciar o desafio de PvP -->
+    <talkaction words="/startpvp" event="script"><![CDATA[
+        function onSay(cid, words, param, channelId)
+            -- Ativa o desafio de PvP
+            setGlobalStorageValue(5678, 1)
+            doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "The PvP challenge has started! Fight for glory and prizes!")
+            return true
+        end
+    ]]></talkaction>
+
+    <!-- Evento para verificar a vitória no desafio de PvP -->
+    <event type="kill" name="pvp_challenge_end" event="script"><![CDATA[
+        function onKill(cid, target, damage, flags)
+            -- Verifica se o desafio de PvP está ativo
+            local isActive = getGlobalStorageValue(5678) == 1
+            if not isActive then
+                return true
+            end
+
+            -- Atribui prêmio ao vencedor
+            if getCreatureType(target) == CREATURETYPE_PLAYER then
+                doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "Congratulations! You won the PvP challenge and received a prize!")
+                doPlayerAddMoney(cid, 500) -- Adiciona prêmio ao vencedor
+                return true
+            end
+
+            return false
+        end
+    ]]></event>
+</mod>
