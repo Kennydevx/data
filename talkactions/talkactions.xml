@@ -40,6 +40,9 @@
 	<talkaction log="yes" group="4" access="3" words="/notations" event="script" value="notations.lua"/>
 	<talkaction log="yes" group="4" access="3" words="/goto;!goto" event="script" value="teleportto.lua"/>
 	<talkaction log="yes" group="4" access="3" words="/baninfo" event="function" value="banishmentInfo"/>
+	
+	<!-- Comando para ativar/desativar PvP Enforced em Thais -->
+	<talkaction log="yes" group="4" access="3" words="/eventpvpe" event="script" value="eventpvpe.lua"/>
 
 	<!-- Players -->
 	<talkaction access="0-4" words="!frags;/frags" event="script" value="frags.lua"/>
