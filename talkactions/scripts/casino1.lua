@@ -92,21 +92,26 @@ function processBet(cid, param)
     local betNumber = tonumber(param)
     if not betNumber or betNumber < 1 or betNumber > cfg.maxNumber then
         doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "Aposta inválida. Escolha um número entre 1 e " .. cfg.maxNumber .. ".")
+        print("Invalid bet number: " .. tostring(betNumber))
         return true
     end
 
     local playerMoney = getPlayerMoney(cid)
+    print("Player money: " .. playerMoney)
     if playerMoney < cfg.betAmount then
         doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "Você não tem dinheiro suficiente para fazer uma aposta. O valor da aposta é " .. cfg.betAmount .. " gold.")
+        print("Not enough money. Player has: " .. playerMoney .. ", Bet amount: " .. cfg.betAmount)
         return true
     end
 
     -- Deduct bet amount and add to the pot
     doPlayerRemoveMoney(cid, cfg.betAmount)
     totalPot = totalPot + cfg.betAmount
+    print("Total pot after bet: " .. totalPot)
 
     -- Store player's bet
     bets[cid] = betNumber
+    print("Bet stored for player " .. getPlayerName(cid) .. ": " .. betNumber)
 
     doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "Você apostou " .. cfg.betAmount .. " gold no número " .. betNumber .. ".")
     return true
@@ -115,11 +120,14 @@ end
 
 -- Function to end the casino event
 function endCasinoEvent()
+    print("endCasinoEvent called")
     if not eventStarted then
+        print("Event not started")
         return
     end
 
     eventStarted = false
+    print("Event ended")
 
     -- Announce the end of the event
     broadcastMessage("O evento de cassino terminou! O número vencedor é " .. winningNumber .. ".", MESSAGE_EVENT_ADVANCE)
@@ -138,10 +146,12 @@ function endCasinoEvent()
             local cid = getPlayerByName(name)
             doPlayerAddMoney(cid, prizePerWinner)
             doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "Parabéns! Você ganhou " .. prizePerWinner .. " gold no evento de cassino.")
+            print("Prize added to player: " .. name)
         end
         broadcastMessage("Os vencedores são: " .. table.concat(winners, ", ") .. ". Cada vencedor recebe " .. prizePerWinner .. " gold.", MESSAGE_EVENT_ADVANCE)
     else
         broadcastMessage("Nenhum jogador acertou o número vencedor. O pote foi perdido.", MESSAGE_EVENT_ADVANCE)
+        print("No winners")
     end
 
     -- Store event result in history
@@ -152,6 +162,7 @@ function endCasinoEvent()
     totalPot = 0
     winningNumber = 0
 end
+
 
 -- Function to repeatedly check for winners and extend the event if necessary
 function checkForWinners()
