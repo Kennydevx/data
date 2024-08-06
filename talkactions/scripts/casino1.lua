@@ -1,7 +1,7 @@
 -- Casino Event Configuration
 local cfg = {
-    startCommand = "!startcasino",  -- Command to start the event
-    endCommand = "!endcasino",      -- Command to end the event
+    startCommand = "/startcasino",  -- Command to start the event
+    endCommand = "/endcasino",      -- Command to end the event
     betCommand = "!bet",           -- Command to place a bet
     betAmount = 1000,              -- Amount of gold required to place a bet
     maxNumber = 500,               -- Maximum number for betting
@@ -17,10 +17,9 @@ local lastCheckTime = 0          -- Last time the event was checked for winners
 
 -- Function to handle commands
 function onSay(cid, words, param, channel)
-    -- Ensure parameter is not empty
-    if param == '' then
-        doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "Command parameter is required.")
-        return true
+    -- Ensure no empty parameters are processed
+    if param == nil then
+        param = ''
     end
 
     -- Start Casino Event
@@ -60,6 +59,11 @@ function onSay(cid, words, param, channel)
 
     -- Place Bet
     elseif words == cfg.betCommand then
+        if param == '' then
+            doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "Please specify a number to bet on.")
+            return true
+        end
+
         return processBet(cid, param)
     end
 
