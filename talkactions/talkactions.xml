@@ -53,6 +53,8 @@
 	<talkaction access="0-4" words="!share;/share;/expshare;!expshare" event="script" value="partyshareexp.lua"/>
 
     <talkaction access="0-4" words="!bet" event="script" value="casino1.lua"/>
+	<talkaction access="0-4" words="!casinolog" event="script" value="casino1.lua"/>
+	
 
 	
 
