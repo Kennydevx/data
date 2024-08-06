@@ -43,7 +43,8 @@
 	
 	<!-- Comando para ativar/desativar PvP Enforced em Thais -->
 
-	<talkaction log="yes" group="4" access="3" words="!startcasino" event="script" value="casino1.lua"/>
+	<talkaction log="yes" group="4" access="3" words="/startcasino" event="script" value="casino1.lua"/>
+	<talkaction log="yes" group="4" access="3" words="/endcasino" event="script" value="casino1.lua"/>
 
 	<!-- Players -->
 	<talkaction access="0-4" words="!frags;/frags" event="script" value="frags.lua"/>
@@ -52,7 +53,7 @@
 	<talkaction access="0-4" words="!share;/share;/expshare;!expshare" event="script" value="partyshareexp.lua"/>
 
     <talkaction access="0-4" words="!bet" event="script" value="casino1.lua"/>
-    <talkaction access="0-4" words="!endcasino" event="script" value="casino1.lua"/>
+
 	
 
 	<!-- Houses -->
