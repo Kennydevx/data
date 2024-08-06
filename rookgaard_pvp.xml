@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mod name="Rookgaard PvP" version="1.0" author="YourName" contact="your.email@example.com" enabled="yes">
-    <talkaction words="/rookenf" event="script" file="rookgaard_pvp.lua"/>
-    <globalevent name="pvp_enforcement" interval="10000" event="script" file="rookgaard_pvp.lua"/>
-</mod>
