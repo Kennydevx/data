@@ -1,22 +1,24 @@
--- Configurações do evento
+-- Casino Event Configuration
 local cfg = {
-    startCommand = "!startcasino",  -- Comando para iniciar o evento
-    endCommand = "!endcasino",      -- Comando para finalizar o evento
-    betAmount = 1000,              -- Valor da aposta
-    maxNumber = 500,               -- Número máximo que pode ser apostado
-    bettingTime = 5 * 60 * 1000,    -- Tempo de apostas (5 minutos)
+    startCommand = "!startcasino",  -- Command to start the event
+    endCommand = "!endcasino",      -- Command to end the event
+    betAmount = 1000,              -- Amount of gold required to place a bet
+    maxNumber = 500,               -- Maximum number for betting
+    bettingTime = 5 * 60 * 1000,    -- Time allowed for betting (5 minutes)
+    checkInterval = 30 * 1000,     -- Interval to check for winners (30 seconds)
 }
 
-local bets = {}                  -- Tabela para armazenar apostas dos jogadores
-local eventStarted = false       -- Flag para verificar se o evento foi iniciado
-local winningNumber = 0          -- Número vencedor
-local totalPot = 0               -- Valor total acumulado no pote
+local bets = {}                  -- Table to store player bets
+local eventStarted = false       -- Flag to check if the event is running
+local winningNumber = 0          -- Winning number
+local totalPot = 0               -- Total accumulated prize pot
+local lastCheckTime = 0          -- Last time the event was checked for winners
 
--- Função para iniciar o evento
+-- Function to start the casino event
 function onSay(cid, words, param, channel)
     if words == cfg.startCommand then
         if eventStarted then
-            doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "O evento de cassino já está em andamento.")
+            doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "The casino event is already in progress.")
             return true
         end
 
@@ -24,17 +26,18 @@ function onSay(cid, words, param, channel)
         bets = {}
         totalPot = 0
         winningNumber = math.random(1, cfg.maxNumber)
+        lastCheckTime = os.time()
 
-        -- Mensagem de início do evento
-        broadcastMessage("O evento de cassino começou! Aposte um número de 1 a " .. cfg.maxNumber .. " por " .. (cfg.bettingTime / 60000) .. " minutos para ter a chance de ganhar o pote acumulado. Use o comando '!bet <número>' para apostar.", MESSAGE_EVENT_ADVANCE)
+        -- Announce the start of the event
+        broadcastMessage("The casino event has started! Place your bets on a number between 1 and " .. cfg.maxNumber .. " within " .. (cfg.bettingTime / 60000) .. " minutes to win the accumulated pot. Use the command '!bet <number>' to place your bet.", MESSAGE_EVENT_ADVANCE)
 
-        -- Encerra o evento após o tempo de apostas
+        -- Schedule event end
         addEvent(endCasinoEvent, cfg.bettingTime)
 
         return true
     elseif words == cfg.endCommand then
         if not eventStarted then
-            doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "Nenhum evento de cassino está em andamento.")
+            doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "No casino event is currently running.")
             return true
         end
 
@@ -46,7 +49,7 @@ function onSay(cid, words, param, channel)
     return false
 end
 
--- Função para processar apostas dos jogadores
+-- Function to process player bets
 function onSay(cid, words, param, channel)
     if not eventStarted then
         return false
@@ -55,31 +58,31 @@ function onSay(cid, words, param, channel)
     if words == "!bet" and param then
         local betNumber = tonumber(param)
         if not betNumber or betNumber < 1 or betNumber > cfg.maxNumber then
-            doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "Aposta inválida. Escolha um número entre 1 e " .. cfg.maxNumber .. ".")
+            doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "Invalid bet. Choose a number between 1 and " .. cfg.maxNumber .. ".")
             return true
         end
 
         local playerMoney = getPlayerMoney(cid)
         if playerMoney < cfg.betAmount then
-            doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "Você não tem dinheiro suficiente para apostar. O valor da aposta é " .. cfg.betAmount .. " gold.")
+            doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "You do not have enough money to place a bet. The bet amount is " .. cfg.betAmount .. " gold.")
             return true
         end
 
-        -- Subtrai o valor da aposta e adiciona ao pote
+        -- Deduct bet amount and add to the pot
         doPlayerRemoveMoney(cid, cfg.betAmount)
         totalPot = totalPot + cfg.betAmount
 
-        -- Armazena a aposta do jogador
+        -- Store player's bet
         bets[cid] = betNumber
 
-        doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "Você apostou " .. cfg.betAmount .. " gold no número " .. betNumber .. ".")
+        doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "You have bet " .. cfg.betAmount .. " gold on number " .. betNumber .. ".")
         return true
     end
 
     return false
 end
 
--- Função para encerrar o evento de cassino
+-- Function to check for winners and end the event
 function endCasinoEvent()
     if not eventStarted then
         return
@@ -87,10 +90,10 @@ function endCasinoEvent()
 
     eventStarted = false
 
-    -- Mensagem de encerramento do evento
-    broadcastMessage("O evento de cassino acabou! O número vencedor é " .. winningNumber .. ".", MESSAGE_EVENT_ADVANCE)
+    -- Announce the end of the event
+    broadcastMessage("The casino event has ended! The winning number is " .. winningNumber .. ".", MESSAGE_EVENT_ADVANCE)
 
-    -- Encontra vencedores e distribui o prêmio
+    -- Find winners
     local winners = {}
     for cid, number in pairs(bets) do
         if number == winningNumber then
@@ -102,14 +105,42 @@ function endCasinoEvent()
         local prizePerWinner = totalPot / #winners
         for _, cid in ipairs(winners) do
             doPlayerAddMoney(cid, prizePerWinner)
-            doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "Parabéns! Você ganhou " .. prizePerWinner .. " gold no evento de cassino.")
+            doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "Congratulations! You have won " .. prizePerWinner .. " gold in the casino event.")
         end
-        broadcastMessage("Os vencedores foram: " .. table.concat(winners, ", ") .. ". Cada um ganhou " .. prizePerWinner .. " gold.", MESSAGE_EVENT_ADVANCE)
+        broadcastMessage("The winners are: " .. table.concat(winners, ", ") .. ". Each winner receives " .. prizePerWinner .. " gold.", MESSAGE_EVENT_ADVANCE)
     else
-        broadcastMessage("Nenhum jogador apostou no número vencedor. O pote foi perdido.", MESSAGE_EVENT_ADVANCE)
+        broadcastMessage("No players guessed the winning number. The pot has been lost.", MESSAGE_EVENT_ADVANCE)
     end
 
     bets = {}
     totalPot = 0
     winningNumber = 0
 end
+
+-- Function to repeatedly check for winners and extend the event if necessary
+function checkForWinners()
+    if not eventStarted then
+        return
+    end
+
+    if os.time() - lastCheckTime >= cfg.checkInterval / 1000 then
+        lastCheckTime = os.time()
+        -- Check if there's a winner and extend event if needed
+        local hasWinner = false
+        for cid, number in pairs(bets) do
+            if number == winningNumber then
+                hasWinner = true
+                break
+            end
+        end
+
+        if not hasWinner then
+            broadcastMessage("No winners yet. The event is extended for more time. Continue placing your bets!", MESSAGE_EVENT_ADVANCE)
+            -- Extend the event by re-scheduling
+            addEvent(checkForWinners, cfg.checkInterval)
+        end
+    end
+end
+
+-- Start the checking loop
+addEvent(checkForWinners, cfg.checkInterval)
