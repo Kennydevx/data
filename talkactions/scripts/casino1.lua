@@ -19,6 +19,8 @@ local eventHistory = {}            -- Table to store the history of events
 
 -- Function to handle commands
 function onSay(cid, words, param, channel)
+    print("onSay called with words: " .. words .. " and param: " .. param)
+
     -- Ensure no empty parameters are processed
     if param == nil then
         param = ''
@@ -26,6 +28,7 @@ function onSay(cid, words, param, channel)
 
     -- Start Casino Event
     if words == cfg.startCommand then
+        print("Start command detected")
         if eventStarted then
             doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "O evento de cassino já está em andamento.")
             return true
@@ -53,6 +56,7 @@ function onSay(cid, words, param, channel)
 
     -- End Casino Event
     elseif words == cfg.endCommand then
+        print("End command detected")
         if not eventStarted then
             doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "Nenhum evento de cassino está em andamento.")
             return true
@@ -64,6 +68,7 @@ function onSay(cid, words, param, channel)
 
     -- Place Bet
     elseif words == cfg.betCommand then
+        print("Bet command detected")
         if param == '' then
             doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "Por favor, especifique um número para apostar.")
             return true
@@ -72,11 +77,13 @@ function onSay(cid, words, param, channel)
         return processBet(cid, param)
     end
 
+    print("Command not recognized")
     return false
 end
 
 -- Function to process player bets
 function processBet(cid, param)
+    print("Processing bet with param: " .. param)
     if not eventStarted then
         doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "Nenhum evento de cassino está em andamento.")
         return true
@@ -104,6 +111,7 @@ function processBet(cid, param)
     doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "Você apostou " .. cfg.betAmount .. " gold no número " .. betNumber .. ".")
     return true
 end
+
 
 -- Function to end the casino event
 function endCasinoEvent()
