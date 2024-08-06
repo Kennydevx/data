@@ -20,6 +20,7 @@ local eventHistory = {}            -- Table to store the history of events
 -- Function to handle commands
 function onSay(cid, words, param, channel)
     print("onSay called with words: " .. words .. " and param: " .. param)
+    print("Event started status: " .. tostring(eventStarted))
 
     -- Ensure no empty parameters are processed
     if param == nil then
@@ -42,6 +43,7 @@ function onSay(cid, words, param, channel)
 
         -- Announce the start of the event
         broadcastMessage("O evento de cassino começou! Faça suas apostas em um número entre 1 e " .. cfg.maxNumber .. " dentro de " .. (cfg.bettingTime / 60000) .. " minutos para ganhar o pote acumulado. Use o comando '" .. cfg.betCommand .. " <número>' para fazer sua aposta.", MESSAGE_EVENT_ADVANCE)
+        print("> Broadcasted message: \"O evento de cassino começou! Faça suas apostas em um número entre 1 e " .. cfg.maxNumber .. " dentro de " .. (cfg.bettingTime / 60000) .. " minutos para ganhar o pote acumulado. Use o comando '" .. cfg.betCommand .. " <número>' para fazer sua aposta.\".")
 
         -- Schedule event end
         addEvent(endCasinoEvent, cfg.bettingTime)
@@ -77,7 +79,6 @@ function onSay(cid, words, param, channel)
         return processBet(cid, param)
     end
 
-    print("Command not recognized")
     return false
 end
 
@@ -116,7 +117,6 @@ function processBet(cid, param)
     doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "Você apostou " .. cfg.betAmount .. " gold no número " .. betNumber .. ".")
     return true
 end
-
 
 -- Function to end the casino event
 function endCasinoEvent()
@@ -163,7 +163,6 @@ function endCasinoEvent()
     winningNumber = 0
 end
 
-
 -- Function to repeatedly check for winners and extend the event if necessary
 function checkForWinners()
     if not eventStarted then
@@ -206,12 +205,31 @@ end
 -- Command to view event history
 function showEventHistory(cid)
     if #eventHistory == 0 then
-        doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "Não há histórico de eventos de cassino.")
-    else
-        for i, event in ipairs(eventHistory) do
-            local winnersStr = table.concat(event.winners, ", ")
-            doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "Evento #" .. i .. ": Número vencedor: " .. event.winningNumber .. ", Pote total: " .. event.totalPot .. ", Vencedores: " .. (winnersStr == "" and "Nenhum" or winnersStr) .. ".")
-        end
+        doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "Nenhum evento de cassino foi realizado ainda.")
+        return true
     end
+
+    doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "Histórico de Eventos de Cassino:")
+    for i, event in ipairs(eventHistory) do
+        local winnerNames = table.concat(event.winners, ", ")
+        doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "Evento " .. i .. ": Número Vencedor: " .. event.winningNumber .. ", Pote: " .. event.totalPot .. " gold, Vencedores: " .. (winnerNames ~= "" and winnerNames or "Nenhum"))
+    end
+
     return true
+end
+
+-- Register the commands
+function onSay(cid, words, param, channel)
+    print("onSay called with words: " .. words .. " and param: " .. param)
+    if words == cfg.startCommand then
+        return startCasinoEvent(cid, words, param, channel)
+    elseif words == cfg.endCommand then
+        return endCasinoEvent()
+    elseif words == cfg.betCommand then
+        return processBet(cid, param)
+    elseif words == "/showhistory" then
+        return showEventHistory(cid)
+    else
+        return false
+    end
 end
