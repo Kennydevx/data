@@ -49,9 +49,9 @@
 	<talkaction access="0-4" words="!online;/online" event="script" value="online.lua"/>
 	<talkaction access="0-4" words="!uptime;/uptime" event="script" value="uptime.lua"/>
 	<talkaction access="0-4" words="!share;/share;/expshare;!expshare" event="script" value="partyshareexp.lua"/>
-	<talkaction name="!startcasino" script="casino.lua"/>
-	<talkaction name="!bet" script="casino.lua"/>
-	<talkaction name="!endcasino" script="casino.lua"/>
+    <talkaction name="!startcasino" script="casino.lua"/>
+    <talkaction name="!bet" script="casino.lua"/>
+    <talkaction name="!endcasino" script="casino.lua"/>
 	
 
 	<!-- Houses -->
