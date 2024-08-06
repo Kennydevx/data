@@ -2,18 +2,18 @@
 local cfg = {
     startCommand = "/startcasino",  -- Command to start the event
     endCommand = "/endcasino",      -- Command to end the event
-    betCommand = "!bet",           -- Command to place a bet
-    betAmount = 1000,              -- Amount of gold required to place a bet
-    maxNumber = 500,               -- Maximum number for betting
+    betCommand = "!bet",            -- Command to place a bet
+    betAmount = 1000,               -- Amount of gold required to place a bet
+    maxNumber = 500,                -- Maximum number for betting
     bettingTime = 5 * 60 * 1000,    -- Time allowed for betting (5 minutes)
-    checkInterval = 30 * 1000,     -- Interval to check for winners (30 seconds)
+    checkInterval = 30 * 1000,      -- Interval to check for winners (30 seconds)
 }
 
-local bets = {}                  -- Table to store player bets
-local eventStarted = false       -- Flag to check if the event is running
-local winningNumber = 0          -- Winning number
-local totalPot = 0               -- Total accumulated prize pot
-local lastCheckTime = 0          -- Last time the event was checked for winners
+local bets = {}                    -- Table to store player bets
+local eventStarted = false         -- Flag to check if the event is running
+local winningNumber = 0            -- Winning number
+local totalPot = 0                 -- Total accumulated prize pot
+local lastCheckTime = 0            -- Last time the event was checked for winners
 
 -- Function to handle commands
 function onSay(cid, words, param, channel)
