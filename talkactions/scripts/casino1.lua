@@ -82,6 +82,37 @@ function onSay(cid, words, param, channel)
     return false
 end
 
+-- Function to start the casino event
+function startCasinoEvent(cid, words, param, channel)
+    print("Start command detected")
+    if eventStarted then
+        doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "O evento de cassino já está em andamento.")
+        return true
+    end
+
+    eventStarted = true
+    bets = {}
+    totalPot = 0
+    winningNumber = math.random(1, cfg.maxNumber)
+    lastCheckTime = os.time()
+
+    -- Announce the start of the event
+    broadcastMessage("O evento de cassino começou! Faça suas apostas em um número entre 1 e " .. cfg.maxNumber .. " dentro de " .. (cfg.bettingTime / 60000) .. " minutos para ganhar o pote acumulado. Use o comando '" .. cfg.betCommand .. " <número>' para fazer sua aposta.", MESSAGE_EVENT_ADVANCE)
+    print("> Broadcasted message: \"O evento de cassino começou! Faça suas apostas em um número entre 1 e " .. cfg.maxNumber .. " dentro de " .. (cfg.bettingTime / 60000) .. " minutos para ganhar o pote acumulado. Use o comando '" .. cfg.betCommand .. " <número>' para fazer sua aposta.\".")
+
+    -- Schedule event end
+    addEvent(endCasinoEvent, cfg.bettingTime)
+
+    -- Start the checking loop
+    addEvent(checkForWinners, cfg.checkInterval)
+
+    -- Start the notification loop
+    addEvent(notifyPlayers, cfg.notificationInterval, cfg.bettingTime)
+
+    return true
+end
+
+
 -- Function to process player bets
 function processBet(cid, param)
     print("Processing bet with param: " .. param)
@@ -118,16 +149,17 @@ function processBet(cid, param)
     return true
 end
 
+
 -- Function to end the casino event
 function endCasinoEvent()
-    print("endCasinoEvent called")
+    print("End command detected")
     if not eventStarted then
-        print("Event not started")
+        print("Nenhum evento de cassino está em andamento.")
         return
     end
 
     eventStarted = false
-    print("Event ended")
+    print("Evento de cassino terminou")
 
     -- Announce the end of the event
     broadcastMessage("O evento de cassino terminou! O número vencedor é " .. winningNumber .. ".", MESSAGE_EVENT_ADVANCE)
@@ -162,6 +194,7 @@ function endCasinoEvent()
     totalPot = 0
     winningNumber = 0
 end
+
 
 -- Function to repeatedly check for winners and extend the event if necessary
 function checkForWinners()
