@@ -4,8 +4,8 @@ local cfg = {
     endCommand = "/endcasino",      -- Command to end the event
     betCommand = "!bet",            -- Command to place a bet
     betAmount = 1000,               -- Amount of gold required to place a bet
-    maxNumber = 500,                -- Maximum number for betting
-    bettingTime = 5 * 60 * 1000,    -- Time allowed for betting (5 minutes)
+    maxNumber = 10,                -- Maximum number for betting
+    bettingTime = 2 * 60 * 1000,    -- Time allowed for betting (5 minutes)
     checkInterval = 30 * 1000,      -- Interval to check for winners (30 seconds)
     notificationInterval = 60 * 1000, -- Interval to notify players of remaining time (1 minute)
 }
@@ -167,7 +167,9 @@ function endCasinoEvent()
     -- Find winners
     local winners = {}
     for cid, number in pairs(bets) do
+        print("Checking bet: Player " .. getPlayerName(cid) .. " bet on " .. number)
         if number == winningNumber then
+            print("Player " .. getPlayerName(cid) .. " won with number " .. number)
             table.insert(winners, getPlayerName(cid))
         end
     end
@@ -194,6 +196,7 @@ function endCasinoEvent()
     totalPot = 0
     winningNumber = 0
 end
+
 
 
 -- Function to repeatedly check for winners and extend the event if necessary
