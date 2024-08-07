@@ -227,14 +227,22 @@ function checkForWinners()
 
         if not hasWinner then
             broadcastMessage("Nenhum vencedor ainda. O evento é estendido por mais tempo. Continue fazendo suas apostas!", MESSAGE_EVENT_ADVANCE)
-            -- Limpar as apostas para permitir novas apostas
-            bets = {}
+            -- Limpar todas as apostas
+            clearBets()
 
             -- Extend the event by re-scheduling
             addEvent(checkForWinners, cfg.checkInterval, cfg.checkInterval)
         end
     end
 end
+
+
+function clearBets()
+    for cid in pairs(bets) do
+        bets[cid] = nil
+    end
+end
+
 
 -- Function to notify players of remaining time
 function notifyPlayers(timeLeft)
