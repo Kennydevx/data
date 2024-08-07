@@ -49,7 +49,7 @@ function onSay(cid, words, param, channel)
         addEvent(endCasinoEvent, cfg.bettingTime)
 
         -- Start the checking loop
-        addEvent(checkForWinners, cfg.checkInterval)
+        addEvent(checkForWinners, cfg.checkInterval, cfg.checkInterval)
 
         -- Start the notification loop
         addEvent(notifyPlayers, cfg.notificationInterval, cfg.bettingTime)
@@ -104,7 +104,7 @@ function startCasinoEvent(cid, words, param, channel)
     addEvent(endCasinoEvent, cfg.bettingTime)
 
     -- Start the checking loop
-    addEvent(checkForWinners, cfg.checkInterval)
+    addEvent(checkForWinners, cfg.checkInterval, cfg.checkInterval)
 
     -- Start the notification loop
     addEvent(notifyPlayers, cfg.notificationInterval, cfg.bettingTime)
@@ -168,7 +168,7 @@ function endCasinoEvent()
     local winners = {}
     for cid, number in pairs(bets) do
         print("Checking bet: Player " .. getPlayerName(cid) .. " bet on " .. number)
-        if tonumber(number) == tonumber(winningNumber) then
+        if number == winningNumber then
             print("Player " .. getPlayerName(cid) .. " won with number " .. number)
             table.insert(winners, getPlayerName(cid))
         end
@@ -221,7 +221,7 @@ function checkForWinners()
         if not hasWinner then
             broadcastMessage("Nenhum vencedor ainda. O evento é estendido por mais tempo. Continue fazendo suas apostas!", MESSAGE_EVENT_ADVANCE)
             -- Extend the event by re-scheduling
-            addEvent(checkForWinners, cfg.checkInterval)
+            addEvent(checkForWinners, cfg.checkInterval, cfg.checkInterval)
         end
     end
 end
