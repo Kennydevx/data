@@ -121,6 +121,12 @@ function processBet(cid, param)
         return true
     end
 
+    -- Verificar se o jogador já fez uma aposta
+    if bets[cid] then
+        doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "Você já fez uma aposta. Espere até a próxima rodada para fazer outra.")
+        return true
+    end
+
     local betNumber = tonumber(param)
     if not betNumber or betNumber < 1 or betNumber > cfg.maxNumber then
         doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "Aposta inválida. Escolha um número entre 1 e " .. cfg.maxNumber .. ".")
@@ -148,6 +154,7 @@ function processBet(cid, param)
     doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "Você apostou " .. cfg.betAmount .. " gold no número " .. betNumber .. ".")
     return true
 end
+
 
 
 -- Função para terminar o evento de cassino
@@ -220,6 +227,9 @@ function checkForWinners()
 
         if not hasWinner then
             broadcastMessage("Nenhum vencedor ainda. O evento é estendido por mais tempo. Continue fazendo suas apostas!", MESSAGE_EVENT_ADVANCE)
+            -- Limpar as apostas para permitir novas apostas
+            bets = {}
+
             -- Extend the event by re-scheduling
             addEvent(checkForWinners, cfg.checkInterval, cfg.checkInterval)
         end
