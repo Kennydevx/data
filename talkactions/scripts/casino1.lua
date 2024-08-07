@@ -150,7 +150,7 @@ function processBet(cid, param)
 end
 
 
--- Function to end the casino event
+-- Função para terminar o evento de cassino
 function endCasinoEvent()
     print("End command detected")
     if not eventStarted then
@@ -161,19 +161,20 @@ function endCasinoEvent()
     eventStarted = false
     print("Evento de cassino terminou")
 
-    -- Announce the end of the event
+    -- Anunciar o fim do evento
     broadcastMessage("O evento de cassino terminou! O número vencedor é " .. winningNumber .. ".", MESSAGE_EVENT_ADVANCE)
 
-    -- Find winners
+    -- Encontrar vencedores
     local winners = {}
     for cid, number in pairs(bets) do
         print("Checking bet: Player " .. getPlayerName(cid) .. " bet on " .. number)
-        if number == winningNumber then
+        if tonumber(number) == tonumber(winningNumber) then
             print("Player " .. getPlayerName(cid) .. " won with number " .. number)
             table.insert(winners, getPlayerName(cid))
         end
     end
 
+    -- Distribuir prêmios
     if #winners > 0 then
         local prizePerWinner = totalPot / #winners
         for _, name in ipairs(winners) do
@@ -188,10 +189,10 @@ function endCasinoEvent()
         print("No winners")
     end
 
-    -- Store event result in history
+    -- Armazenar resultado do evento na história
     table.insert(eventHistory, {winningNumber = winningNumber, totalPot = totalPot, winners = winners})
 
-    -- Reset event variables
+    -- Resetar variáveis do evento
     bets = {}
     totalPot = 0
     winningNumber = 0
