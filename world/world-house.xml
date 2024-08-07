@@ -69,7 +69,7 @@
 	<house name="Main Street 9b, 2nd floor (Shop)" houseid="70" entryx="32377" entryy="32224" entryz="6" rent="1260" townid="3" size="22" />
 	<house name="Upper Swamp Lane 8" houseid="71" entryx="32398" entryy="32256" entryz="7" rent="8120" townid="3" size="120" />
 	<house name="Upper Swamp Lane 10" houseid="72" entryx="32412" entryy="32256" entryz="7" rent="2060" townid="3" size="23" />
-	<house name="Upper Swamp Lane 12" houseid="73" entryx="32419" entryy="32256" entryz="7" rent="3800" townid="3" size="44" />
+	<house name="Upper Swamp Lane 12" houseid="73" entryx="32419" entryy="32256" entryz="7" rent="3800" townid="3" size="43" />
 	<house name="The City Wall 9" houseid="74" entryx="32419" entryy="32247" entryz="7" rent="955" townid="3" size="14" />
 	<house name="Southern Thais Guildhall" houseid="75" entryx="32401" entryy="32254" entryz="7" rent="22440" townid="3" size="266" />
 	<house name="The City Wall 7g" houseid="76" entryx="32419" entryy="32238" entryz="7" rent="585" townid="3" size="10" />
@@ -101,7 +101,7 @@
 	<house name="Mill Avenue 1 (Shop)" houseid="102" entryx="32398" entryy="32181" entryz="7" rent="1300" townid="3" size="16" />
 	<house name="Castle of Greenshore" houseid="103" entryx="32290" entryy="32070" entryz="7" rent="18860" townid="3" size="247" />
 	<house name="Greenshore Clanhall" houseid="104" entryx="32278" entryy="32069" entryz="7" rent="10800" townid="3" size="128" />
-	<house name="Greenshore Village, Villa" houseid="105" entryx="32276" entryy="32045" entryz="7" rent="9540" townid="3" size="129" />
+	<house name="Greenshore Village, Villa" houseid="105" entryx="32276" entryy="32045" entryz="7" rent="9540" townid="3" size="115" />
 	<house name="Greenshore Village 1" houseid="106" entryx="32274" entryy="32062" entryz="7" rent="2420" townid="3" size="30" />
 	<house name="Greenshore Village, Shop" houseid="109" entryx="32278" entryy="32052" entryz="7" rent="1800" townid="3" size="20" />
 	<house name="Greenshore Village 7" houseid="112" entryx="32266" entryy="32032" entryz="7" rent="1260" townid="3" size="17" />
@@ -186,10 +186,10 @@
 	<house name="Magician's Alley 1c" houseid="193" entryx="32311" entryy="31795" entryz="6" rent="500" townid="5" size="7" />
 	<house name="Magician's Alley 1a" houseid="194" entryx="32311" entryy="31798" entryz="6" rent="700" townid="5" size="7" />
 	<house name="Magician's Alley 1d" houseid="195" entryx="32311" entryy="31798" entryz="6" rent="450" townid="5" size="6" />
-	<house name="Carlin Clanhall" houseid="197" entryx="32307" entryy="31818" entryz="7" rent="11450" townid="5" size="164" />
+	<house name="Carlin Clanhall" houseid="197" entryx="32307" entryy="31818" entryz="7" rent="11450" townid="5" size="156" />
 	<house name="Magician's Alley 4" houseid="198" entryx="32317" entryy="31820" entryz="7" rent="2750" townid="5" size="39" />
 	<house name="Magician's Alley 8" houseid="199" entryx="32331" entryy="31819" entryz="7" rent="1400" townid="5" size="20" />
-	<house name="Lonely Sea Side Hostel" houseid="201" entryx="32319" entryy="31839" entryz="7" rent="12180" townid="5" size="236" />
+	<house name="Lonely Sea Side Hostel" houseid="201" entryx="32319" entryy="31839" entryz="7" rent="12180" townid="5" size="215" />
 	<house name="Suntower" houseid="202" entryx="32341" entryy="31847" entryz="7" rent="10080" townid="5" size="192" />
 	<house name="Harbour Lane 3" houseid="203" entryx="32362" entryy="31823" entryz="7" rent="3560" townid="5" size="76" />
 	<house name="Harbour Flats, Flat 11" houseid="204" entryx="32378" entryy="31836" entryz="6" rent="520" townid="5" size="10" />
@@ -213,7 +213,7 @@
 	<house name="Theater Avenue 6b" houseid="222" entryx="32376" entryy="31794" entryz="6" rent="820" townid="5" size="10" />
 	<house name="East Lane 1a" houseid="223" entryx="32393" entryy="31796" entryz="7" rent="2260" townid="5" size="47" />
 	<house name="East Lane 1b" houseid="224" entryx="32396" entryy="31801" entryz="6" rent="1700" townid="5" size="34" />
-	<house name="East Lane 2" houseid="225" entryx="32399" entryy="31798" entryz="7" rent="4500" townid="5" size="94" />
+	<house name="East Lane 2" houseid="225" entryx="32399" entryy="31798" entryz="7" rent="4500" townid="5" size="86" />
 	<house name="Moonkeep" houseid="226" entryx="32432" entryy="31762" entryz="7" rent="13020" townid="5" size="227" />
 	<house name="Northern Street 7" houseid="227" entryx="32389" entryy="31774" entryz="7" rent="1700" townid="5" size="33" />
 	<house name="Northern Street 5" houseid="228" entryx="32380" entryy="31772" entryz="7" rent="1980" townid="5" size="40" />
@@ -729,12 +729,12 @@
 	<house name="Botham IV e" houseid="817" entryx="33181" entryy="32860" entryz="6" rent="850" townid="6" size="13" />
 	<house name="Botham IV c" houseid="818" entryx="33181" entryy="32855" entryz="6" rent="850" townid="6" size="13" />
 	<house name="Botham IV a" houseid="819" entryx="33175" entryy="32853" entryz="5" rent="1400" townid="6" size="20" />
-	<house name="Cormaya 5" houseid="820" entryx="33278" entryy="31980" entryz="7" rent="5375" townid="9" size="96" />
+	<house name="Cormaya 5" houseid="820" entryx="33278" entryy="31980" entryz="7" rent="5375" townid="9" size="81" />
 	<house name="Cormaya 10." houseid="822" entryx="33294" entryy="32005" entryz="7" rent="3800" townid="9" size="71" />
 	<house name="Cormaya 11" houseid="823" entryx="33305" entryy="32005" entryz="7" rent="2035" townid="9" size="34" />
 	<house name="Castle of the White Dragon" houseid="824" entryx="33297" entryy="31986" entryz="7" rent="25110" townid="9" size="426" />
 	<house name="Fibula Clanhall" houseid="825" entryx="32178" entryy="32373" entryz="7" rent="11430" townid="3" size="122" />
-	<house name="Fibula Village, Villa" houseid="826" entryx="32140" entryy="32374" entryz="7" rent="10590" townid="3" size="197" />
+	<house name="Fibula Village, Villa" houseid="826" entryx="32140" entryy="32374" entryz="7" rent="10590" townid="3" size="183" />
 	<house name="Fibula Village, Bar" houseid="827" entryx="32151" entryy="32399" entryz="7" rent="5230" townid="3" size="56" />
 	<house name="Fibula Village 5" houseid="828" entryx="32171" entryy="32440" entryz="7" rent="1790" townid="3" size="20" />
 	<house name="Fibula Village 4" houseid="829" entryx="32175" entryy="32440" entryz="7" rent="1790" townid="3" size="20" />

@@ -45,6 +45,7 @@
 
 	<talkaction log="yes" group="4" access="3" words="/startcasino" event="script" value="casino1.lua"/>
 	<talkaction log="yes" group="4" access="3" words="/endcasino" event="script" value="casino1.lua"/>
+	<talkaction log="yes" group="4" words="!startsafezone" access="3" event="script" value="battle_royale_safezone.lua"/>
 
 	<!-- Players -->
 	<talkaction access="0-4" words="!frags;/frags" event="script" value="frags.lua"/>
@@ -54,6 +55,8 @@
 
     <talkaction access="0-4" words="!bet" event="script" value="casino1.lua"/>
 	<talkaction access="0-4" words="!casinolog" event="script" value="casino1.lua"/>
+	
+
 	
 
 	
