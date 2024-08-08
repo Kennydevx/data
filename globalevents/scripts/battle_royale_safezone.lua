@@ -1,8 +1,8 @@
-local uniqueIdToCheck = 13550
-local newItemId = 712
+local actionIdToCheck = 13550
+local newItemId = 9831
 
--- Função para obter todos os tiles com o uniqueid especificado
-local function getTilesWithUniqueId(fromPos, toPos, uniqueId)
+-- Função para obter todos os tiles com o actionid especificado
+local function getTilesWithActionId(fromPos, toPos, actionId)
     local tiles = {}
     for x = fromPos.x, toPos.x do
         for y = fromPos.y, toPos.y do
@@ -11,7 +11,7 @@ local function getTilesWithUniqueId(fromPos, toPos, uniqueId)
             if tile then
                 local items = tile:getItems()
                 for _, tileItem in ipairs(items) do
-                    if tileItem and tileItem:getAttribute(ITEM_ATTRIBUTE_UNIQUEID) == uniqueId then
+                    if tileItem and tileItem:getActionId() == actionId then
                         table.insert(tiles, tilePos)
                     end
                 end
@@ -36,7 +36,6 @@ end
 -- Função para transformar os tiles gradualmente até restar apenas um
 local function closeSafeZoneStep(tiles, centerPos)
     if #tiles > 1 then
-        -- Encontra o tile mais distante do centro e o transforma
         local farthestTile, maxDistance = nil, -1
         for _, pos in ipairs(tiles) do
             local distance = math.sqrt((pos.x - centerPos.x)^2 + (pos.y - centerPos.y)^2)
@@ -51,14 +50,13 @@ local function closeSafeZoneStep(tiles, centerPos)
             if tile then
                 local items = tile:getItems()
                 for _, tileItem in ipairs(items) do
-                    if tileItem and tileItem:getAttribute(ITEM_ATTRIBUTE_UNIQUEID) == uniqueIdToCheck then
+                    if tileItem and tileItem:getActionId() == actionIdToCheck then
                         tileItem:transform(newItemId)
                         break
                     end
                 end
             end
 
-            -- Remove o tile transformado da lista
             for i, pos in ipairs(tiles) do
                 if pos.x == farthestTile.x and pos.y == farthestTile.y then
                     table.remove(tiles, i)
@@ -67,7 +65,6 @@ local function closeSafeZoneStep(tiles, centerPos)
             end
         end
 
-        -- Chama a função novamente após um intervalo
         addEvent(closeSafeZoneStep, 1000, tiles, centerPos)
     else
         print("Apenas um sqm restante.")
@@ -78,12 +75,12 @@ end
 function onThink(interval)
     local fromPos = {x = 990, y = 990, z = 7}
     local toPos = {x = 1010, y = 1010, z = 7}
-    local tiles = getTilesWithUniqueId(fromPos, toPos, uniqueIdToCheck)
+    local tiles = getTilesWithActionId(fromPos, toPos, actionIdToCheck)
     if #tiles > 0 then
         local centerPos = findCenterPoint(tiles)
         closeSafeZoneStep(tiles, centerPos)
     else
-        print("Nenhum tile encontrado com o uniqueid especificado.")
+        print("Nenhum tile encontrado com o actionid especificado.")
     end
     return true
 end
