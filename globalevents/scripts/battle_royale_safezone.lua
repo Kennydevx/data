@@ -1,5 +1,5 @@
 local uniqueIdToCheck = 13550
-local newItemId = 9831
+local newItemId = 712
 
 -- Função para obter todos os tiles com o uniqueid especificado
 local function getTilesWithUniqueId(fromPos, toPos, uniqueId)
