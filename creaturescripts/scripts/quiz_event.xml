@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mod name="Quiz Event" version="1.0" author="YourName" contact="your.email@example.com" enabled="yes">
-    <talkaction words="/startquiz" event="script">data/creaturescripts/scripts/quiz_event.lua</talkaction>
-    <talkaction words="/answer" event="script">data/creaturescripts/scripts/quiz_event.lua</talkaction>
-</mod>

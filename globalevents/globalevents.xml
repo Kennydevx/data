@@ -8,7 +8,5 @@
 	<globalevent name="shop" interval="30000" script="shop.lua"/>
 	<globalevent name="Mensagem" interval="900000" script="msg.lua"/>
 	<globalevent name="Save" interval="3600000" script="save.lua"/>
-	<globalevent name="battle_royale_safezone" interval="0" event="script" value="battle_royale_safezone.lua"/>
-
 	<!-- <globalevent name="rashid" type="startup" event="script" value="rashid.lua"/> -->
 </globalevents>

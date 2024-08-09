@@ -6,7 +6,6 @@ local config = {
 }
 
 function onStartup()
-	registerCreatureEvent("onSay", "casino1")
 	local data, time, result = {}, os.time(), db.getResult("SELECT `id`, `ownerid`, `creationdata`, `checkdata` FROM `guilds` WHERE `world_id` = " .. getConfigValue('worldId') .. ";")
 	if(result:getID() ~= -1) then
 		repeat

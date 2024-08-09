@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mod name="Treasure Hunt" version="1.0" author="YourName" contact="your.email@example.com" enabled="yes">
-    <event type="think" name="treasure_hunt_think" event="script">data/creaturescripts/scripts/treasure_hunt.lua</event>
-    <talkaction words="/starttreasurehunt" event="script">data/creaturescripts/scripts/treasure_hunt.lua</talkaction>
-    <event type="use" name="treasure_hunt_use" event="script">data/creaturescripts/scripts/treasure_hunt.lua</event>
-</mod>
