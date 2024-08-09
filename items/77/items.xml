@@ -11884,6 +11884,16 @@
 	<item id="5546" article="a" name="premium scroll">
 		<attribute key="description" value="30 premium days"/>
 	</item>	
+	<item id="6666" article="a" name="fire field">
+		<attribute key="type" value="magicfield"/>
+		<attribute key="decayTo" value="1502"/>
+		<attribute key="duration" value="120"/>
+		<attribute key="field" value="fire">
+			<attribute key="ticks" value="10000"/>
+			<attribute key="count" value="1"/>
+			<attribute key="damage" value="100"/>
+		</attribute>
+	</item>
 	<item id="20001" name="water"/>
 	<item id="20002" name="blood"/>
 	<item id="20003" name="beer"/>
@@ -11906,4 +11916,5 @@
 	<item id="20042" name="health potion"/>
 	<item id="20043" name="spirit potion"/>
 	<item id="20047" name="mana potion"/>
+	
 </items>

@@ -40,12 +40,17 @@
 	<talkaction log="yes" group="4" access="3" words="/notations" event="script" value="notations.lua"/>
 	<talkaction log="yes" group="4" access="3" words="/goto;!goto" event="script" value="teleportto.lua"/>
 	<talkaction log="yes" group="4" access="3" words="/baninfo" event="function" value="banishmentInfo"/>
+	
+	<talkaction log="yes" group="4" access="3" words="/startcasino" event="script" value="casino1.lua"/>
+	<talkaction log="yes" group="4" access="3" words="/endcasino" event="script" value="casino1.lua"/>
 
 	<!-- Players -->
 	<talkaction access="0-4" words="!frags;/frags" event="script" value="frags.lua"/>
 	<talkaction access="0-4" words="!online;/online" event="script" value="online.lua"/>
 	<talkaction access="0-4" words="!uptime;/uptime" event="script" value="uptime.lua"/>
 	<talkaction access="0-4" words="!share;/share;/expshare;!expshare" event="script" value="partyshareexp.lua"/>
+	<talkaction access="0-4" words="!bet" event="script" value="casino1.lua"/>
+	<talkaction access="0-4" words="!casinolog" event="script" value="casino1.lua"/>
 
 	<!-- Houses -->
 	<talkaction access="0-4" words="alana res;/buyhouse;!buyhouse" filter="word-spaced" event="function" value="houseBuy"/>
