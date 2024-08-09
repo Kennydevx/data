@@ -311,7 +311,6 @@
 	<house name="Coastwood 3" houseid="327" entryx="32668" entryy="31612" entryz="6" rent="1310" townid="1" size="17" />
 	<house name="Coastwood 4" houseid="328" entryx="32671" entryy="31612" entryz="6" rent="1145" townid="1" size="14" />
 	<house name="Coastwood 5" houseid="330" entryx="32676" entryy="31592" entryz="6" rent="1530" townid="1" size="21" />
-	<house name="Coastwood 6 (Shop)" houseid="331" entryx="32688" entryy="31592" entryz="6" rent="1595" townid="1" size="21" />
 	<house name="Coastwood 7" houseid="333" entryx="32695" entryy="31592" entryz="6" rent="660" townid="1" size="9" />
 	<house name="Coastwood 8" houseid="334" entryx="32690" entryy="31600" entryz="6" rent="1255" townid="1" size="16" />
 	<house name="Coastwood 9" houseid="335" entryx="32688" entryy="31614" entryz="6" rent="935" townid="1" size="14" />
